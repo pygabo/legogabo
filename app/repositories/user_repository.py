@@ -2,7 +2,7 @@ from typing import List
 
 from neo4j import GraphDatabase
 
-from app.models.user import User
+from app.models.user import User, UserInput
 
 
 class UserRepository:
@@ -12,7 +12,7 @@ class UserRepository:
     def close(self):
         self.driver.close()
 
-    def create_user(self, user: User) -> User:
+    def create_user(self, user: UserInput) -> User:
         with self.driver.session() as session:
             query = (
                 "CREATE (u:User {name: $name, email: $email, age: $age})"
